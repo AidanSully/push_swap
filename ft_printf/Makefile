@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/25 13:40:40 by asulliva       #+#    #+#                 #
-#    Updated: 2019/07/09 16:11:28 by asulliva      ########   odam.nl          #
+#    Updated: 2019/07/19 14:49:47 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ $(NAME):
 
 clean:
 	@rm -f $(OBJS)
-	@echo "Cleaning .o files in libft"
 	@make clean -C $(LIBFT)
 
 fclean: clean

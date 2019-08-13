@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: awehlbur <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/23 13:19:12 by awehlbur      #+#    #+#                 */
-/*   Updated: 2019/01/23 13:19:13 by awehlbur      ########   odam.nl         */
+/*   Created: 2019/01/23 13:19:12 by awehlbur       #+#    #+#                */
+/*   Updated: 2019/07/11 17:13:17 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list		*element;
 
-	if (!(element = (t_list*)malloc(sizeof(t_list))))
+	element = (t_list*)malloc(sizeof(t_list));
+	if (!element)
 		return (NULL);
 	if (content == NULL)
 	{

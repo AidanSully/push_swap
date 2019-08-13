@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 14:11:27 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:39:56 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/08/08 18:18:26 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_stack
 	int			colour;
 	int			print;
 	int			total;
+	int			slow;
 }				t_stack;
 
 typedef struct	s_moves
@@ -48,15 +49,15 @@ typedef struct	s_moves
 }				t_moves;
 
 /*
-**  read.c
+**  functions in read.c
 */
 
-void			get_options(int *ac, char ***av, t_stack *stack);
-void			error(t_stack *stack, int usage);
-t_stack			*get_args(int ac, char **av, t_stack *stack);
+void			get_options(int *ac, char ***av, t_stack *stack, int program);
+void			error(t_stack *stack, int usage, char *message);
+t_stack			*get_args(int ac, char **av, t_stack *stack, int option);
 
 /*
-**	stack.c
+**	functions in stack.c
 */
 
 void			free_stack(t_stack *stack);
@@ -66,14 +67,17 @@ int				reverse_sort(int *stack, int len);
 void			init(t_stack *stack, int ac, int option);
 
 /*
-**	print.c
+**	functions in print.c
 */
 
 void			init_print(t_stack *stack);
 void			final_print(t_stack *stack);
+void			info_print(void);
+void			usage_print(int option);
+void			stack_print(t_stack *stack);
 
 /*
-**	swap.c
+**	functions in swap.c
 */
 
 void			sa(t_stack *stack);
@@ -81,14 +85,14 @@ void			sb(t_stack *stack);
 void			ss(t_stack *stack);
 
 /*
-**	push.c
+**	functions in push.c
 */
 
 void			pa(t_stack *stack);
 void			pb(t_stack *stack);
 
 /*
-**	rot.c
+**	functions in rot.c
 */
 
 void			ra(t_stack *stack);
@@ -96,7 +100,7 @@ void			rb(t_stack *stack);
 void			rr(t_stack *stack);
 
 /*
-**	revrot.c
+**	functions in revrot.c
 */
 
 void			rra(t_stack *stack);
@@ -131,7 +135,7 @@ void			big_sort(t_stack *stack);
 t_moves			*dawae(t_stack *stack);
 
 /*
-** functions in rotate.c
+** functions in find_rotate.c
 */
 
 void			rot_to_smallest_a(t_stack *stack);

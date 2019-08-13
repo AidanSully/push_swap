@@ -1,0 +1,24 @@
+If len of stack->a < 4
+    - Apply some simple swapping and/or rotating to sort, allways < 3 moves
+
+Any other len of stack->a
+    1. Push 2 b (otherwise there is nothing to compare with)
+    2. While len of stack->a > 50 or 2 depending on the initial length of the array
+        - Find best move (where elements of stack->a should be in stack->b using max and min elements, shortest moves first)
+            - Find out where every element of stack->a should be in stack be, save in string (moves->a is the rotations, same for moves->b)
+                - If element < stack->b[find_min_el(stack->b)] || element > stack->b[find_max_el(stack->b)] place = finnd_max_el(stack->b)
+                - Else loop thru leng of b, if (element < stack->b[i] && ((i + 1 < len && element > stack->b[i + 1]) || (i + 1 == len && element > stack->b[0])))
+                    Place behind this element
+            - Check if there are common moves with a and be (common_moves = (moves->a > moves->b ? moves->b : moves->a))
+            - The best move is the one that takes the least amount of moves to place
+        - Apply the best move
+        - Push to b
+    3. While len of stack->a > 2
+        - Find position of smallest element of a
+        - Rotate to this element and push to b
+    4. While len of stack->b > 0
+        - Find out where every element of stack->n should be in stack be
+            - If element < stack->a[find_min_el(stack->a)] || elem < stack->a[find_max_el(stack->a)] place = find_min_el(stack->a)
+            - Else loop thru ln of a, if (element < stack->b[i] && ((i + 1 < len && element > stack->b[i + 1]) || (i + 1 == len && element > stack->b[0])))
+                Place behind this element
+    5. Array is sorted

@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_memcmp.c                                        :+:    :+:            */
+/*   ft_strjoinone.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: asulliva <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/11 19:23:08 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/15 18:05:19 by asulliva      ########   odam.nl         */
+/*   Created: 2019/01/28 17:10:43 by asulliva       #+#    #+#                */
+/*   Updated: 2019/07/10 14:05:12 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int				ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_strjoinone(char *s, char c)
 {
-	const unsigned char		*p1;
-	const unsigned char		*p2;
-	size_t					i;
+	int		i;
+	int		j;
+	char	*str;
 
-	p1 = s1;
-	p2 = s2;
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n)
+	if (!s)
+		return (NULL);
+	i = ft_strlen(s);
+	j = 0;
+	str = ft_strnew(i + 1);
+	if (!str)
+		return (NULL);
+	while (j < i)
 	{
-		if (p1[i] != p2[i])
-			return (p1[i] - p2[i]);
-		else
-			i++;
+		str[j] = s[j];
+		j++;
 	}
-	return (0);
+	str[i] = c;
+	str[i + 1] = '\0';
+	free(s);
+	return (str);
 }

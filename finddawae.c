@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 15:27:24 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:43:17 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/07/15 18:12:31 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static t_moves	*calc_moves(t_stack *stack, int pos)
 	moves->rot_a = ft_strnew(3);
 	moves->rot_b = ft_strnew(3);
 	moves->rot_common = ft_strnew(3);
-	moves->a = rot_a(stack->size_b, pos, &(moves->rot_a));
+	moves->a = rot_a(stack->size_a, pos, &(moves->rot_a));
 	moves->b = find_bpos(stack->b, stack->size_b,
 	stack->a[pos], &(moves->rot_b));
 	moves->common = find_common(moves);
@@ -85,7 +85,7 @@ t_moves			*dawae(t_stack *stack)
 	t_moves		*moves;
 
 	i = 0;
-	while (i < stack->size_b)
+	while (i < stack->size_a)
 	{
 		moves = calc_moves(stack, i);
 		if (i == 0)

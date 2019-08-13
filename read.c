@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 14:06:39 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:39:49 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/08/13 19:21:15 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,49 +34,69 @@ static int		validate_args(char **av, char *arg, int start)
 	return (1);
 }
 
-void			error(t_stack *stack, int usage)
-{
-	free_stack(stack);
-	if (usage == 1)
-		ft_printf("Usage:\n./push_swap [int array]\nOptions:\n[-v -t -c]\n");
-	ft_printf("Error\n");
-	exit(0);
-}
-
-t_stack			*get_args(int ac, char **av, t_stack *stack)
+t_stack			*get_args(int ac, char **av, t_stack *stack, int option)
 {
 	int		i;
 
 	i = 0;
+	init(stack, ac, option);
 	while (i < ac)
 	{
-		if (validate_args(av, av[i], i + 1) == 1)
+		if (validate_args(av, av[i], i + 1))
 			stack->a[i] = ft_atoi(av[i]);
 		else
-			error(stack, 0);
+			error(stack, option, "Invalid input");
 		i++;
 	}
 	return (stack);
 }
 
-void			get_options(int *ac, char ***av, t_stack *stack)
+static void		small_error(t_stack *stack, int program)
+{
+	free(stack);
+	usage_print(program);
+	exit(0);
+}
+
+static void		init_options(t_stack *stack)
+{
+	stack->total = 0;
+	stack->colour = 0;
+	stack->print = 0;
+	stack->slow = 0;
+	stack->size_a = 0;
+	stack->size_b = 0;
+	stack->a = NULL;
+	stack->b = NULL;
+}
+
+/*
+**	program == 1 push_swap
+*/
+
+void			get_options(int *ac, char ***av, t_stack *stack, int program)
 {
 	int i;
 
 	i = 0;
-	stack->total = 0;
-	stack->colour = 0;
-	stack->print = 0;
+	init_options(stack);
 	while (i < *ac && *((*av)[i]) == '-')
 	{
+		if (*((*av)[i]) == '-' && ft_atoi(&(*((*av))[i])) < 0)
+			break ;
 		if (ft_strequ((*av)[i], "-v"))
 			stack->print = 1;
 		else if (ft_strequ((*av)[i], "-t"))
 			stack->total = 1;
 		else if (ft_strequ((*av)[i], "-c"))
 			stack->colour = 1;
+		else if (ft_strequ((*av)[i], "-vs") && program == 1)
+		{
+			stack->slow = 1;
+			stack->print = 1;
+		}
 		else
-			error(stack, 1);
+			small_error(stack, program);
 		i++;
 	}
 	*ac -= i;

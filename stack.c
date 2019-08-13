@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 14:12:06 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:34:57 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/08/13 19:30:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,6 @@ int				sorted(int *stack, int len)
 	while (i < len - 1)
 	{
 		if (stack[i] < stack[i + 1])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-int				reverse_sort(int *stack, int len)
-{
-	int i;
-
-	i = 0;
-	while (i < len - 1)
-	{
-		if (stack[i] > stack[i + 1])
 			i++;
 		else
 			return (0);
@@ -66,5 +51,5 @@ void			init(t_stack *stack, int ac, int option)
 	stack->size_a = ac;
 	stack->size_b = 0;
 	stack->ops = 0;
-	stack->print_ops = (option == 1 ? 0 : 1);
+	stack->print_ops = (option == 1 ? 1 : 0);
 }

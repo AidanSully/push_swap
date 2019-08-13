@@ -5,45 +5,36 @@
 /*                                                     +:+                    */
 /*   By: awehlbur <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/17 15:27:01 by awehlbur      #+#    #+#                 */
-/*   Updated: 2019/01/17 15:27:03 by awehlbur      ########   odam.nl         */
+/*   Created: 2019/01/17 15:27:01 by awehlbur       #+#    #+#                */
+/*   Updated: 2019/07/09 16:32:06 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "libft.h"
 
-static int		ft_whitespace(char c)
+long long	ft_atoi(const char *str)
 {
-	if ((c == ' ') || (c == '\t') || (c == '\v') || (c == '\n')\
-	|| (c == '\r') || (c == '\f'))
-		return (1);
-	else
-		return (0);
-}
+	long long i;
+	long long nb;
+	long long flag;
 
-int				ft_atoi(const char *s)
-{
-	int c;
-	int i;
-	int n;
-
-	c = 0;
 	i = 0;
-	n = 0;
-	while (((*s == '-' || *s == '+') && ft_isdigit(s[1]))
-	|| ft_whitespace(*s))
+	nb = 0;
+	flag = 0;
+	while ((str[i] == '\n') || (str[i] == '\v') || (str[i] == '\f')
+	|| (str[i] == ' ') || (str[i] == '\r') || (str[i] == '\t'))
+		i++;
+	if (str[i] == '-')
+		flag = 1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
-		if (*s == '-')
-		{
-			c = 1;
-			if (!(ft_isdigit(s[1])))
-				return (0);
-		}
-		s++;
+		nb = nb * 10;
+		nb = nb + str[i] - '0';
+		i++;
 	}
-	while (s[i] != '\0' && ft_isdigit(s[i]))
-		n = (n * 10) + (s[i++] - 48);
-	if (c)
-		n = -n;
-	return (n);
+	if (flag == 1)
+		return (-nb);
+	return (nb);
 }

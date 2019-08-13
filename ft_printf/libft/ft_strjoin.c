@@ -6,7 +6,7 @@
 /*   By: awehlbur <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 15:31:52 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/07/09 16:00:05 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/07/11 17:10:37 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		len2 = 0;
 	else
 		len2 = ft_strlen(s2);
-	if ((str = ft_strnew(len1 + ft_strlen(s2) + 1)) == NULL)
+	str = ft_strnew(len1 + ft_strlen(s2) + 1);
+	if (str == NULL)
 		return (NULL);
 	(len1 == 0) ? str : ft_strcpy(str, s1);
 	(len2 == 0) ? str : ft_strcpy((str + len1), s2);

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/03 18:14:36 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:51:18 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/08/13 19:32:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ra(t_stack *stack)
 	int tmp;
 
 	if (stack->size_a == 0)
-		error(stack, 0);
+		error(stack, 0, "No elements in stack a");
 	i = 1;
 	tmp = stack->a[0];
 	while (i < stack->size_a)
@@ -27,18 +27,11 @@ void		ra(t_stack *stack)
 		i++;
 	}
 	stack->a[i - 1] = tmp;
-	stack->print_ops ? ft_printf("ra\n") : 0;
-	if (stack->print)
-	{
-		ft_printf("A: ");
-		ft_print_int_array(stack->a, stack->size_a);
-		if (stack->size_b)
-		{
-			ft_printf("B: ");
-			ft_print_int_array(stack->b, stack->size_b);
-		}
-	}
+	if (stack->print_ops)
+		ft_putstr("ra\n");
 	stack->ops++;
+	if (stack->print)
+		stack_print(stack);
 }
 
 void		rb(t_stack *stack)
@@ -47,7 +40,7 @@ void		rb(t_stack *stack)
 	int tmp;
 
 	if (stack->size_b == 0)
-		error(stack, 0);
+		error(stack, 0, "No elements in stack b");
 	i = 1;
 	tmp = stack->b[0];
 	while (i < stack->size_b)
@@ -56,18 +49,11 @@ void		rb(t_stack *stack)
 		i++;
 	}
 	stack->b[i - 1] = tmp;
-	stack->print_ops ? ft_printf("rb\n") : 0;
-	if (stack->print)
-	{
-		ft_printf("A: ");
-		ft_print_int_array(stack->a, stack->size_a);
-		if (stack->size_b)
-		{
-			ft_printf("B: ");
-			ft_print_int_array(stack->b, stack->size_b);
-		}
-	}
+	if (stack->print_ops)
+		ft_putstr("rb\n");
 	stack->ops++;
+	if (stack->print)
+		stack_print(stack);
 }
 
 void		rr(t_stack *stack)
@@ -83,16 +69,9 @@ void		rr(t_stack *stack)
 	rb(stack);
 	stack->print_ops = tmp_ops;
 	stack->print = tmp_print;
-	stack->print_ops ? ft_printf("rr\n") : 0;
+	if (stack->print_ops)
+		ft_putstr("rr\n");
 	if (stack->print)
-	{
-		ft_printf("A: ");
-		ft_print_int_array(stack->a, stack->size_a);
-		if (stack->size_b)
-		{
-			ft_printf("B: ");
-			ft_print_int_array(stack->b, stack->size_b);
-		}
-	}
+		stack_print(stack);
 	stack->ops--;
 }

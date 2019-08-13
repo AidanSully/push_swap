@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/01 16:44:46 by tmeulenb       #+#    #+#                */
-/*   Updated: 2019/04/08 16:58:52 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/07/10 15:11:29 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ char	*ft_itoa_base(unsigned long long value, int base)
 	neg = 0;
 	nbr = (char*)malloc(sizeof(nbr) * i + 1);
 	nbr[i + neg] = '\0';
-	while (i-- > 0)
+	while (i > 0)
 	{
+		i--;
 		nbr[i + neg] = (value % base) + (value % base > 9 ? 'A' - 10 : '0');
 		value = value / base;
 	}

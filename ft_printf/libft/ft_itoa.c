@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 15:28:56 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/03/12 16:21:09 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/07/11 17:13:49 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char			*ft_itoa(long long int n)
 	size_t	i;
 
 	i = ft_calc(n) + 1;
-	if (!(str = (char*)malloc(sizeof(char) * i)))
+	str = (char*)malloc(sizeof(char) * i);
+	if (!str)
 		return (NULL);
 	if (n == 0)
 		str[0] = '0';

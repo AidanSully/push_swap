@@ -65,7 +65,8 @@ SRC = ft_memset.c \
 		ft_putwstr.c \
 		ft_print_int_array.c \
 		get_next_line.c \
-		ft_list_add_back.c
+		ft_list_add_back.c \
+		ft_strjoinone.c
 
 OBJ = ft_memset.o \
 		ft_memmove.o \
@@ -132,7 +133,8 @@ OBJ = ft_memset.o \
 		ft_putwstr.o \
 		ft_print_int_array.o \
 		get_next_line.o \
-		ft_list_add_back.o
+		ft_list_add_back.o \
+		ft_strjoinone.o
 
 HEADER = ./libft.h
 

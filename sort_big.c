@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/09 15:21:29 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/09 15:53:24 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/08/06 15:06:58 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		big_sort(t_stack *stack)
 	t_moves *best_move;
 	int		len;
 
-	len = (stack->size_a > 200) ? 30 : 2;
+	len = (stack->size_a > 200) ? 50 : 2;
 	while (stack->size_b != 2)
 		pb(stack);
 	while (stack->size_a > len)
@@ -126,4 +126,6 @@ void		big_sort(t_stack *stack)
 	}
 	insert_b(stack);
 	insert_a(stack);
+	while (!sorted(stack->a, stack->size_a))
+		ra(stack);
 }

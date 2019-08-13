@@ -3,43 +3,46 @@
 /*                                                        ::::::::            */
 /*   ft_strsplit.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: awehlbur <marvin@codam.nl>                   +#+                     */
+/*   By: asulliva <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/17 15:33:19 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/07/09 16:10:07 by asulliva      ########   odam.nl         */
+/*   Created: 2019/01/17 13:41:09 by asulliva       #+#    #+#                */
+/*   Updated: 2019/07/11 17:07:15 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	ft_word_count(const char *s, char c)
+static int		ft_words(const char *s, char c)
 {
-	int flag;
-	int word;
+	int		words;
+	int		flag;
 
 	flag = 0;
-	word = 0;
+	words = 0;
 	if (!s || !c)
 		return (0);
-	while (*s)
+	while (*s != '\0')
 	{
-		if (*s == c && flag == 1)
+		if (flag == 1 && *s == c)
 			flag = 0;
-		if (*s != c && flag == 0)
+		if (flag == 0 && *s != c)
 		{
 			flag = 1;
-			word++;
+			words++;
 		}
 		s++;
 	}
-	return (word);
+	return (words);
 }
 
-static int	ft_wlen(const char *s, char c)
+static int		ft_word_len(const char *s, char c)
 {
-	int len;
+	int		len;
 
 	len = 0;
+	if (!s || !c)
+		return (0);
 	while (*s != c && *s != '\0')
 	{
 		len++;
@@ -48,25 +51,30 @@ static int	ft_wlen(const char *s, char c)
 	return (len);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
+	char	**tab;
+	int		words;
 	int		i;
-	int		nb_words;
-	char	**array;
 
 	i = 0;
-	nb_words = ft_word_count((const char *)s, c);
-	array = (char **)malloc(sizeof(*array) * (nb_words + 1));
-	if (array == NULL)
+	words = ft_words(s, c);
+	if (!s || !c)
 		return (NULL);
-	while (nb_words--)
+	tab = (char**)malloc(sizeof(char*) * ft_words(s, c) + 1);
+	if (!tab)
+		return (NULL);
+	while (words)
 	{
+		words--;
 		while (*s == c && *s != '\0')
 			s++;
-		array[i] = ft_strsub((const char *)s, 0, ft_wlen((const char *)s, c));
-		s = s + ft_wlen((const char*)s, c);
+		tab[i] = ft_strsub(s, 0, ft_word_len(s, c));
+		if (tab[i] == NULL)
+			return (NULL);
+		s = s + ft_word_len(s, c);
 		i++;
 	}
-	array[i] = NULL;
-	return (array);
+	tab[i] = NULL;
+	return (tab);
 }
